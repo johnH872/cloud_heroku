@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.ServletContext;  
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ import banThuCung.adminService.SupplierServcieImp;
 @Controller
 @RequestMapping(value = "/quan-tri/san-pham/cac-san-pham")
 public class ProductControllerAd {
-	private static final String UPLOAD_DIRECTORY ="C:/Users/HOANG/Downloads/BanThuCung/BanThuCung/src/main/webapp/assets/user/img/products"; 
+	private static final String UPLOAD_DIRECTORY ="src/main/webapp/assets/user/img/products"; 
 
 	@Autowired
 	ProductServiceImpAd productService = new ProductServiceImpAd();
@@ -158,11 +159,11 @@ public class ProductControllerAd {
 			mv.setViewName("redirect:/quan-tri/dang-nhap");
 			return mv;
 		}
-
-		String path = UPLOAD_DIRECTORY;  
-		String filename = file.getOriginalFilename();  
-
-		System.out.println(path+" "+filename);        
+		ServletContext context = session.getServletContext();  
+    		String path = context.getRealPath(UPLOAD_DIRECTORY);  
+    		String filename = file.getOriginalFilename();  
+  
+   		System.out.println(path+" "+filename);       
 
 		byte[] bytes = file.getBytes();  
 		BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  
