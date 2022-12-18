@@ -26,7 +26,7 @@ import banThuCung.adminService.SupplierServcieImp;
 @Controller
 @RequestMapping(value = "/quan-tri/san-pham/cac-san-pham")
 public class ProductControllerAd {
-	private static final String UPLOAD_DIRECTORY ="C:/Users/HOANG/Downloads/BanThuCung/BanThuCung/src/main/webapp/assets/user/img/products"; 
+	private static final String UPLOAD_DIRECTORY ="/src/main/webapp/assets/user/img/products"; 
 
 	@Autowired
 	ProductServiceImpAd productService = new ProductServiceImpAd();
