@@ -12,7 +12,7 @@
 				<spring:form action="/quan-tri/dang-nhap" method="POST" modelAttribute="admin_acc" class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
 					<div class="d-flex align-items-center justify-content-between mb-3">
 						<a href="#" class=""><h3 class="text-primary">ADMIN</h3></a>
-						<h3>Sign In</h3>
+						<h3>Sign In Test</h3>
 					</div>
 					<i>${AdChangeSuccess}</i>
 					<div class="form-floating mb-3">
