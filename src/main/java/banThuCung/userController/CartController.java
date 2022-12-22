@@ -116,20 +116,20 @@ public class CartController extends BaseController {
 	public ModelAndView checkOutBills(HttpServletRequest request, HttpSession session, @ModelAttribute("orders") Orders order) {
 		order.setQuantity(Double.parseDouble(session.getAttribute("TotalPriceCart").toString()));
 		order.setTotal(Double.parseDouble(session.getAttribute("TotalQuantityCart").toString()));
-		Accounts loginInfo = (Accounts)session.getAttribute("loginInfo");
-		order.setAcc_id(loginInfo.getAcc_id());
 		
-		if(ordersService.addOrders(order) > 0) {
-			HashMap<String, CartDto> carts = (HashMap<String, CartDto>)session.getAttribute("ShoppingCart");
-			ordersService.addOrdersDetail(carts);
-		}
-		session.removeAttribute("ShoppingCart");
-		session.setAttribute("TotalQuantityCart", 0);
-		session.setAttribute("TotalPriceCart", 0);
-		mvShare.addObject(loginInfo);
-		mvShare.addObject("errorLogin","Đã đặt hàng thành công!!!!");
 		try {
-			
+			Accounts loginInfo = (Accounts)session.getAttribute("loginInfo");
+			order.setAcc_id(loginInfo.getAcc_id());
+		
+			if(ordersService.addOrders(order) > 0) {
+				HashMap<String, CartDto> carts = (HashMap<String, CartDto>)session.getAttribute("ShoppingCart");
+				ordersService.addOrdersDetail(carts);
+			}
+			session.removeAttribute("ShoppingCart");
+			session.setAttribute("TotalQuantityCart", 0);
+			session.setAttribute("TotalPriceCart", 0);
+			mvShare.addObject(loginInfo);
+			mvShare.addObject("errorLogin","Đã đặt hàng thành công!!!!");
 		} catch (Exception e) {
 			mvShare.addObject("errorLogin","Vui lòng đăng nhập trước khi đặt hàng hoặc kiểm tra lại giỏ hàng!");
 			mvShare.setViewName("user/bills/checkout");
